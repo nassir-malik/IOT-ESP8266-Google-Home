@@ -13,6 +13,7 @@ class SimpleChat(WebSocket):
 
     def handleMessage(self):
         address1 = self.address
+        print(self.data)
         for client in clients:
           if client != self:
              client.sendMessage(self.address[0] + u' - ' + self.data)
@@ -45,14 +46,14 @@ def webhook():
     return "test"
 
 def flaskServer(address1):
-    #port = int(os.getenv('PORT', 80))
-    #print("Starting app on port %d" % port)
-    app.run(debug=False, port=80, host='', threaded=True)
+    port = int(os.getenv('PORT', 80))
+    print("Starting app on port %d" % port)
+    app.run(debug=False, port=port, host='', threaded=True)
 
 def webSocketServer():
-    #port = int(os.getenv('PORT', 5000))
-    #print("Starting webSocketServer on port %d" % port )
-    server = SimpleWebSocketServer('', 8000, SimpleChat)
+    port = int(os.getenv('PORT', 5000))
+    print("Starting webSocketServer on port %d" % port )
+    server = SimpleWebSocketServer('', port, SimpleChat)
     server.serveforever()
 
 if __name__ == '__main__':
