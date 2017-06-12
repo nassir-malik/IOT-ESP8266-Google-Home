@@ -50,7 +50,8 @@ def flaskServer(address1):
     app.run(debug=False, port=port, host='', threaded=True)
 
 def webSocketServer():
-    server = SimpleWebSocketServer('', 8000, SimpleChat)
+    port = int(os.getenv('PORT', 8000))
+    server = SimpleWebSocketServer('', port, SimpleChat)
     server.serveforever()
 
 if __name__ == '__main__':
