@@ -50,9 +50,9 @@ class HttpWSSProtocol(websockets.WebSocketServerProtocol):
 
             response = '\r\n'.join([
                 'HTTP/1.1 200 OK',
-                'Content-Type: text/html',
+                'Content-Type: text/json',
                 '',
-                '<html><body><h1>'+self.rddata+'</h1></body></html>',
+                ''+self.rddata+'',
             ])
         except Exception as e:
             print(e)
