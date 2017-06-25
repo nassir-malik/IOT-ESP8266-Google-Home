@@ -1,1 +1,6 @@
+<<<<<<< HEAD
 websockets==3.2
+=======
+Flask==0.12.1
+requests==2.13.0
+>>>>>>> origin/master
