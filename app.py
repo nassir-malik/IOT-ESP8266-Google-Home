@@ -69,7 +69,7 @@ async def ws_handler(websocket, path):
         #g, player_name = join_game(game_name, websocket)
         HttpWSSProtocol.rwebsocket = websocket
         await websocket.send(
-            json.dumps({'event': 'init', 'player_name': "test", 'score': ['score']})
+            json.dumps({'event': 'OK'})
         )
         data ='{"empty":"empty"}'
         while True:
