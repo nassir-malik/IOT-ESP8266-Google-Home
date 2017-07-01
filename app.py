@@ -86,7 +86,8 @@ async def ws_handler(websocket, path):
         while True:
             data = await websocket.recv()
             updateData(data)
-
+    except Exception as e:
+        print(e)
     finally:
         print("")
 
