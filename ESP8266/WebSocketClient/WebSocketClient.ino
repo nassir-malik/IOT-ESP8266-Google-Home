@@ -19,11 +19,10 @@ const int relayPin = 16;
 WiFiClient client;
 
 void setup() {
-  //while( (waitKey = getKey()) == NO_KEY ) yield();
   Serial.begin(115200);
   delay(10);
   
-// Setup Relay
+  // Setup Relay
   pinMode(relayPin, OUTPUT);
   // We start by connecting to a WiFi network
 
