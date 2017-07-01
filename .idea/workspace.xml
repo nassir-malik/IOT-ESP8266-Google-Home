@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a801eb5f-a2f1-4847-9008-eea0b4e5c786" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ESP8266/WebSocketClient/WebSocketClient.ino" afterPath="$PROJECT_DIR$/ESP8266/WebSocketClient/WebSocketClient.ino" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.py" afterPath="$PROJECT_DIR$/app.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,8 +23,8 @@
       <file leaf-file-name="app.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="61" column="28" lean-forward="false" selection-start-line="61" selection-start-column="28" selection-end-line="61" selection-end-column="28" />
+            <state relative-caret-position="372">
+              <caret line="80" column="15" lean-forward="true" selection-start-line="80" selection-start-column="15" selection-end-line="80" selection-end-column="15" />
               <folding>
                 <element signature="e#0#17#0" expanded="true" />
                 <element signature="e#199#1193#0" expanded="false" />
@@ -449,8 +448,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="61" column="28" lean-forward="false" selection-start-line="61" selection-start-column="28" selection-end-line="61" selection-end-column="28" />
+        <state relative-caret-position="372">
+          <caret line="80" column="15" lean-forward="true" selection-start-line="80" selection-start-column="15" selection-end-line="80" selection-end-column="15" />
           <folding>
             <element signature="e#0#17#0" expanded="true" />
             <element signature="e#199#1193#0" expanded="false" />

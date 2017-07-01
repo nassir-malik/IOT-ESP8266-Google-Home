@@ -2,10 +2,13 @@
 #include <WebSocketClient.h>
 #include <ArduinoJson.h>
 
-const char* ssid     = "suddenlink.net-AD42";
-const char* password = "G7MBSY89C601814";
-char path[] = "/ws";
-char host[] = "192.168.0.108";
+// @@@@@@@@@@@@@@@ Modify wi-fi and domain info @@@@@@@@@@@@@@@@@@@@
+const char* ssid     = "suddenlink.net-AD42"; //enter your ssid/ wifi router name - 2.4 Ghz only
+const char* password = "G7MBSY89C601814";     // enter ssid password
+char host[] = "espiot.herokuapp.com"; //enter your Heroku domain name like "espiot.herokuapp.com" 192.168.0.108
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+char path[] = "/ws"; 
 int port = 80;
 WebSocketClient webSocketClient;
 
