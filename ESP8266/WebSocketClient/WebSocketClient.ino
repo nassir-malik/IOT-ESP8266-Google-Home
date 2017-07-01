@@ -9,7 +9,7 @@ char host[] = "espiot.herokuapp.com"; //enter your Heroku domain name like "espi
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 char path[] = "/ws"; 
-int port = 8765;
+int port = 80;
 WebSocketClient webSocketClient;
 
 DynamicJsonBuffer jsonBuffer;
