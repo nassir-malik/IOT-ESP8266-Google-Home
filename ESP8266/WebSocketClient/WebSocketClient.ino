@@ -1,13 +1,16 @@
 #include <ESP8266WiFi.h>
 #include <WebSocketClient.h>
-
+#include <ArduinoJson.h>
 
 const char* ssid     = "suddenlink.net-AD42";
 const char* password = "G7MBSY89C601814";
 char path[] = "/ws";
 char host[] = "192.168.0.108";
-  
+int port = 80;
 WebSocketClient webSocketClient;
+
+DynamicJsonBuffer jsonBuffer;
+const int relayPin = 16;
 
 // Use WiFiClient class to create TCP connections
 WiFiClient client;
@@ -16,7 +19,9 @@ void setup() {
   //while( (waitKey = getKey()) == NO_KEY ) yield();
   Serial.begin(115200);
   delay(10);
-
+  
+// Setup Relay
+  pinMode(relayPin, OUTPUT);
   // We start by connecting to a WiFi network
 
   Serial.println();
@@ -24,9 +29,6 @@ void setup() {
   Serial.print("Connecting to ");
   Serial.println(ssid);
 
-  //ESP.wdtDisable();
-//ESP.wdtEnable(WDTO_8S);
-//WiFi.persistent(false);
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
   
@@ -42,15 +44,72 @@ void setup() {
 
   delay(6000);
   
+  Serial.println("Trying to reconnect to WebSock");
+  winSockConnect();
 
-  // Connect to the websocket server
-  if (client.connect("192.168.0.108", 80)) {
+}
+
+
+void loop() {
+//Serial.println("Loop started");
+  String data;
+
+  if (client.connected()) {
+    //webSocketClient.sendData("{\"name\":\"OK\"}");
+    webSocketClient.getData(data);
+          if (data.length() > 0) {
+            Serial.print("Received data: ");
+            Serial.println(data);
+      
+            //load request into json
+            JsonObject& root = jsonBuffer.parseObject(data);
+            String device = root["device"];
+            String location = root["location"];
+            String state = root["state"];
+            String query = root["query"];
+            String message;
+            if(query!="?"){
+            
+                    if(state=="on"){
+                      digitalWrite(relayPin, HIGH);
+                      message = "{\"state\":\"ON\"}";
+                    }else{
+                      digitalWrite(relayPin, LOW);
+                      message = "{\"state\":\"OFF\"}";
+                    
+                    }
+            }else{
+              int state = digitalRead(relayPin);
+                 if(state==1){
+                      message = "{\"state\":\"ON\"}";
+                    }else{
+                      message = "{\"state\":\"OFF\"}";
+                    }
+            }
+            Serial.println("Sending response back");
+            webSocketClient.sendData(message);
+            webSocketClient.sendData(message);
+            Serial.println("Response send");
+          }
+
+  } else {
+          Serial.println("Client disconnected.");
+          Serial.println("Trying to reconnect to WebSock");
+          winSockConnect();
+  }
+  
+  // wait to fully let the client disconnect
+  delay(2000);
+  //Serial.println("Loop end");
+}
+
+void winSockConnect(){
+  Serial.print(".");
+    // Connect to the websocket server
+  if (client.connect(host, port)) {
     Serial.println("Connected");
   } else {
     Serial.println("ws Connection failed.");
-    while(1) {
-      // Hang on failure
-    }
   }
 
   // Handshake with the server
@@ -60,51 +119,6 @@ void setup() {
     Serial.println("Handshake successful");
   } else {
     Serial.println("Handshake failed.");
-    while(1) {
-      // Hang on failure
-      delay(1);
-    }  
   }
-
 }
 
-
-void loop() {
-
-  String data;
-  //ESP.wdtFeed();
-  /*if(WiFi.status() != WL_CONNECTED){
-    WiFi.begin(ssid, password);
-  
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }}*/
-  if (client.connected()) {
-    //webSocketClient.sendData("{\"name\":\"OK\"}");
-    webSocketClient.getData(data);
-    if (data.length() > 0) {
-      Serial.print("Received data: ");
-      Serial.println(data);
-      webSocketClient.sendData("{\"name\":\"OK\"}");
-      webSocketClient.sendData("{\"name\":\"OK\"}");
-    }
-    
-    // capture the value of analog 1, send it along
-   // pinMode(1, INPUT);
-    //data = String(analogRead(1));
-    
-    //webSocketClient.sendData("1");
-    
-  } else {
-    Serial.println("Client disconnected.");
-    while (1) {
-      delay(1);
-      // Hang on disconnect.
-    }
-  }
-  
-  // wait to fully let the client disconnect
-  delay(2000);
-  //Serial.println("Loop end");
-}

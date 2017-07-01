@@ -38,7 +38,7 @@ class HttpWSSProtocol(websockets.WebSocketServerProtocol):
 
 
     async def http_handler(self, method, path, version):
-
+        response = ''
         try:
 
             googleRequest = self.reader._buffer.decode('utf-8')
@@ -52,13 +52,17 @@ class HttpWSSProtocol(websockets.WebSocketServerProtocol):
                 ESPparameters = googleRequestJson['result']['parameters']
                 ESPparameters['query'] = 'cmd'
             # send command to ESP over websocket
+            if self.rwebsocket== None:
+                print("Device is not connected!")
+                return
             await self.rwebsocket.send(json.dumps(ESPparameters))
 
             #wait for response and send it back to API.ai as is
             self.rddata = await self.rwebsocket.recv()
             #{"speech": "It is working", "displayText": "It is working"}
             print(self.rddata)
-
+            state = json.loads(self.rddata)['state']
+            self.rddata = '{"speech": "It is turned "'+state+', "displayText": "It is turned "'+state+'}'
 
             response = '\r\n'.join([
                 'HTTP/1.1 200 OK',
@@ -74,35 +78,16 @@ def updateData(data):
     HttpWSSProtocol.rddata = data
 
 async def ws_handler(websocket, path):
-    #logger.info('Client connecting: %s, %s', websocket, path)
     game_name = 'g1'
-
     try:
-        #g, player_name = join_game(game_name, websocket)
         HttpWSSProtocol.rwebsocket = websocket
-        await websocket.send(
-            json.dumps({'event': 'OK'})
-        )
+        await websocket.send(json.dumps({'event': 'OK'}))
         data ='{"empty":"empty"}'
         while True:
-        #     #data = await websocket.recv()
-            print('In ws function:')
             data = await websocket.recv()
-            print('Out ws function:')
-        #
-        #logger.info('data: %s', data)
-        #     data = json.loads(data)
             updateData(data)
-        #print('From sock func:' + str(data))
-
-            #handle_event(g, player_name, data, websocket)
-
-
-
 
     finally:
-        #logger.info(u'Disconnecting client and leaving game')
-        #leave_game(websocket)
         print("")
 
 
