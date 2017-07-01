@@ -4,8 +4,6 @@ import json
 import time, os
 
 
-
-
 class HttpWSSProtocol(websockets.WebSocketServerProtocol):
     rwebsocket = None
     rddata = None
@@ -13,7 +11,7 @@ class HttpWSSProtocol(websockets.WebSocketServerProtocol):
         try:
             request_line, headers = await websockets.http.read_message(self.reader)
             method, path, version = request_line[:-2].decode().split(None, 2)
-
+            #websockets.accept()
         except Exception as e:
             print(e.args)
             self.writer.close()
@@ -42,11 +40,25 @@ class HttpWSSProtocol(websockets.WebSocketServerProtocol):
     async def http_handler(self, method, path, version):
 
         try:
-            await self.rwebsocket.send(json.dumps(self.reader._buffer.decode('utf-8')))
-            print('In http function:')
+
+            googleRequest = self.reader._buffer.decode('utf-8')
+            googleRequestJson = json.loads(googleRequest)
+
+            #{"location": "living", "state": "on", "device": "lights"}
+            if 'what' in googleRequestJson['result']['resolvedQuery']:
+                ESPparameters = googleRequestJson['result']['parameters']
+                ESPparameters['query'] = '?'
+            else:
+                ESPparameters = googleRequestJson['result']['parameters']
+                ESPparameters['query'] = 'cmd'
+            # send command to ESP over websocket
+            await self.rwebsocket.send(json.dumps(ESPparameters))
+
+            #wait for response and send it back to API.ai as is
             self.rddata = await self.rwebsocket.recv()
-            print('Out HTTP function:')
-            print("HTTP function")
+            #{"speech": "It is working", "displayText": "It is working"}
+            print(self.rddata)
+
 
             response = '\r\n'.join([
                 'HTTP/1.1 200 OK',
@@ -81,14 +93,19 @@ async def ws_handler(websocket, path):
         #logger.info('data: %s', data)
         #     data = json.loads(data)
             updateData(data)
-        print('From sock func:' + str(data))
+        #print('From sock func:' + str(data))
 
             #handle_event(g, player_name, data, websocket)
+
+
+
 
     finally:
         #logger.info(u'Disconnecting client and leaving game')
         #leave_game(websocket)
         print("")
+
+
 
 port = int(os.getenv('PORT', 80))
 start_server = websockets.serve(ws_handler, '0.0.0.0', port, klass=HttpWSSProtocol)
