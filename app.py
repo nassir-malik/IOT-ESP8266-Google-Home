@@ -93,7 +93,7 @@ async def ws_handler(websocket, path):
 
 
 
-port = int(os.getenv('PORT', 5678))
+port = int(os.getenv('PORT', 80))#5678
 start_server = websockets.serve(ws_handler, '0.0.0.0', port, klass=HttpWSSProtocol)
 # logger.info('Listening on port %d', port)
 
