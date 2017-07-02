@@ -12,9 +12,9 @@
 
 
 // @@@@@@@@@@@@@@@ You only need to midify modify wi-fi and domain info @@@@@@@@@@@@@@@@@@@@
-const char* ssid     = "suddenlink.net-AD42"; //enter your ssid/ wi-fi(case sensitiv) router name - 2.4 Ghz only
-const char* password = "G7MBSY89C601814";     // enter ssid password (case sensitiv)
-char host[] = "espiot.herokuapp.com"; //enter your Heroku domain name like "espiot.herokuapp.com" 
+const char* ssid     = "enter your ssid"; //enter your ssid/ wi-fi(case sensitiv) router name - 2.4 Ghz only
+const char* password = "enter ssid password";     // enter ssid password (case sensitiv)
+char host[] = "enter your Heroku domain name"; //enter your Heroku domain name like "espiot.herokuapp.com" 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 int port = 80;
