@@ -30,8 +30,10 @@ void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) { //uint8_t
 
     switch(type) {
         case WStype_DISCONNECTED:
-            //USE_SERIAL.printf("[WSc] Disconnected!\n");
            Serial.println("Disconnected! ");
+           Serial.println("Connecting...");
+               webSocket.begin(host, port, path);
+               webSocket.onEvent(webSocketEvent);
             break;
             
         case WStype_CONNECTED:
@@ -53,7 +55,7 @@ void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) { //uint8_t
             hexdump(payload, length);
             Serial.print("Got bin");
             // send data to server
-            // webSocket.sendBIN(payload, length);
+            webSocket.sendBIN(payload, length);
             break;
     }
 
@@ -88,6 +90,7 @@ void setup() {
 
 void loop() {
     webSocket.loop();
+    delay(2000);
 }
 
 void processWebScoketRequest(String data){
@@ -97,7 +100,7 @@ void processWebScoketRequest(String data){
             String location = (const char*)root["location"];
             String state = (const char*)root["state"];
             String query = (const char*)root["query"];
-            String message;
+            String message="";
 
             Serial.println(data);
             if(query == "cmd"){ //if query check state
@@ -127,6 +130,6 @@ void processWebScoketRequest(String data){
             Serial.println(message);
                   // send message to server
                   webSocket.sendTXT(message);
-                  webSocket.sendTXT(message);
+                  if(query == "cmd" || query == "?"){webSocket.sendTXT(message);}
 }
 
