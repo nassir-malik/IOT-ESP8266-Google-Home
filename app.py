@@ -93,8 +93,8 @@ async def ws_handler(websocket, path):
 
 
 
-port = int(os.getenv('PORT', 80))
-start_server = websockets.serve(ws_handler, '', port, klass=HttpWSSProtocol)
+#port = int(os.getenv('PORT', 80))
+start_server = websockets.serve(ws_handler, '', '', klass=HttpWSSProtocol)
 # logger.info('Listening on port %d', port)
 
 asyncio.get_event_loop().run_until_complete(start_server)
