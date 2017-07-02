@@ -9,10 +9,7 @@ class HttpWSSProtocol(websockets.WebSocketServerProtocol):
     rddata = None
     async def handler(self):
         try:
-            try:
-                request_line, headers = await websockets.http.read_message(self.reader)
-            except Exception as e:
-                print(e)
+            request_line, headers = await websockets.http.read_message(self.reader)
             method, path, version = request_line[:-2].decode().split(None, 2)
             #websockets.accept()
         except Exception as e:
@@ -96,7 +93,7 @@ async def ws_handler(websocket, path):
 
 
 
-port = int(os.getenv('PORT', 80))#5678
+port = int(os.getenv('PORT', 5678))
 start_server = websockets.serve(ws_handler, '0.0.0.0', port, klass=HttpWSSProtocol)
 # logger.info('Listening on port %d', port)
 
