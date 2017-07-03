@@ -1,5 +1,5 @@
 # IOT-ESP8266-Google-Home
-iot
+This project does not requir you to open firewall ports or setup a revers proxy.
 
 1. Download this project and unzip.
   
