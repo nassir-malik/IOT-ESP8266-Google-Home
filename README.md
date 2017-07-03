@@ -1,5 +1,5 @@
 # IOT-ESP8266-Google-Home
-This project you will beable to controll ESP8266 with Google Home without opening a firewall port or setuping a revers proxy.
+In This project you will beable to controll ESP8266 with Google Home without opening a firewall port or setuping a revers proxy.
 
 1. Download this project and unzip.
   
