@@ -6,7 +6,7 @@ In This project you will beable to controll ESP8266 with Google Home without ope
 2. Deploy this project to Heroku by clicking this button
     [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
     
-3. Copy following folder to "C:\Program Files (x86)\Arduino\libraries"
+3. Copy following folders to "C:\Program Files (x86)\Arduino\libraries"
 
     arduinoWebSockets
   
