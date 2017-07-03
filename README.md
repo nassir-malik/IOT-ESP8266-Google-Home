@@ -1,8 +1,19 @@
 # IOT-ESP8266-Google-Home
-iot
-Tutorial coming soon...
-Copy following folder to "C:\Program Files (x86)\Arduino\libraries"
-Websocket
-ArduinoJson
+In This project you will beable to controll ESP8266 with Google Home without opening a firewall port or setuping a revers proxy.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+1. Download this project and unzip.
+  
+2. Deploy this project to Heroku by clicking this button
+    [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+    
+3. Copy following folders to "C:\Program Files (x86)\Arduino\libraries"
+
+    arduinoWebSockets
+  
+    ArduinoJson
+  
+4. Update and flash your ESP8266 with "ESP8266/WebSocketClient/ESP8266_WebSocketClient/ESP8266_WebSocketClient.ino"
+
+5. Create an API.ai agent and import "matrix-ai.zip"  and setup Google intagration and webhook
+
+6. Test and enjoy.
