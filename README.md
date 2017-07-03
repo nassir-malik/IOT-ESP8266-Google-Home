@@ -8,9 +8,9 @@ iot
     
 3. Copy following folder to "C:\Program Files (x86)\Arduino\libraries"
 
-  arduinoWebSockets
+    arduinoWebSockets
   
-  ArduinoJson
+    ArduinoJson
   
 4. Flash your ESP8266 with "ESP8266/WebSocketClient/ESP8266_WebSocketClient/ESP8266_WebSocketClient.ino"
 
