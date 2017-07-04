@@ -35,4 +35,4 @@ In This project you will beable to controll ESP8266 with Google Home without ope
 
 6. Make sure Google action option is enabled.
 
-7. If still does not work go to church and pray to God -:)
+7. If still does not work then go to church and pray to God -:)
