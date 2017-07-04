@@ -19,7 +19,7 @@ In This project you will beable to controll ESP8266 with Google Home without ope
 6. Test and enjoy.
 
 
-##Troubleshooting
+## Troubleshooting
 
 1. Make sure Google Home device is logged in to same account as your API.ai accout.
 
