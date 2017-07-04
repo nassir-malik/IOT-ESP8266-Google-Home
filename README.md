@@ -30,3 +30,7 @@ In This project you will beable to controll ESP8266 with Google Home without ope
 3. If you see crash errors in Arduino IDE serial monitor the use a better power supply.
 
 4. Use a saprate power source for relay or use 5volts power source and use 3.3 voltage ragulator to power ESP8266 from same power supply.
+
+5. Make suer sure you enter the correct URL for webhook in API.ai
+
+6. Make sure Google action option is enabled.
