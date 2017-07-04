@@ -17,3 +17,16 @@ In This project you will beable to controll ESP8266 with Google Home without ope
 5. Create an API.ai agent and import "matrix-ai.zip"  and setup Google intagration and webhook
 
 6. Test and enjoy.
+
+
+##Troubleshooting
+
+1. Make sure Google Home device is logged in to same account as your API.ai accout.
+
+2. If unable to trigger relay power cycle the ESP8266.
+
+3. If you are stillunable to trigger the relay then restart Heroku app by selecting option "Restat all dynos" and then power cycle the ESP8266.
+
+3. If you see crash errors in Arduino IDE serial monitor the use a better power supply.
+
+4. Use a saprate power source for relay or use 5volts power source and use 3.3 voltage ragulator to power ESP8266 from same power supply.
