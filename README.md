@@ -34,3 +34,5 @@ In This project you will beable to controll ESP8266 with Google Home without ope
 5. Make suer sure you enter the correct URL for webhook in API.ai
 
 6. Make sure Google action option is enabled.
+
+7. If still does not work go to church and pray to God -:)
