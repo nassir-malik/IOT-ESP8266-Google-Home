@@ -24,7 +24,7 @@ WebSocketsClient webSocket;
 const int relayPin = 16;
 DynamicJsonBuffer jsonBuffer;
 String currState;
-
+int pingCount=0;
 void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) { //uint8_t *
 
 
@@ -90,7 +90,18 @@ void setup() {
 
 void loop() {
     webSocket.loop();
+	//If you make change to delay mak sure adjust the ping
     delay(2000);
+	// make sure after every 40 seconds send a ping to Heroku
+	//so it does not terminate the websocket connection
+	//This is to keep the conncetion alive between ESP and Heroku
+	if (pingCount > 20) {
+		pingCount = 0;
+		webSocket.sendTXT("\"heartbeat\":\"keepalive\"");
+	}
+	else {
+		pingCount += 1;
+	}
 }
 
 void processWebScoketRequest(String data){
