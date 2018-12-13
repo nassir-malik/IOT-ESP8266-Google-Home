@@ -115,7 +115,7 @@ void processWebScoketRequest(String data){
 
             Serial.println(data);
             if(query == "cmd"){ //if query check state
-              Serial.println("Recieved command!");
+              Serial.println("Received command!");
                     if(state=="on"){
                       digitalWrite(relayPin, HIGH);
                       message = "{\"state\":\"ON\"}";
@@ -127,7 +127,7 @@ void processWebScoketRequest(String data){
                     }
                   
             }else if(query == "?"){ //if command then execute   
-              Serial.println("Recieved query!");
+              Serial.println("Received query!");
               int state = digitalRead(relayPin);
                  if(currState=="ON"){
                       message = "{\"state\":\"ON\"}";
