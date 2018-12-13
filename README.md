@@ -17,7 +17,7 @@ In This project you will beable to control ESP8266 with Google Home without open
   
 4. Update and flash your ESP8266 with "ESP8266/WebSocketClient/ESP8266_WebSocketClient/ESP8266_WebSocketClient.ino"
 
-5. Create an API.ai agent and import "matrix-ai.zip"  and setup Google intagration and webhook
+5. Create an API.ai agent and import "matrix-ai.zip"  and setup Google integration and webhook
 
 6. Test and enjoy.
 
@@ -32,7 +32,7 @@ In This project you will beable to control ESP8266 with Google Home without open
 
 3. If you see crash errors in Arduino IDE serial monitor the use a better power supply.
 
-4. Use a saprate power source for relay or use 5volts power source and use 3.3 voltage ragulator to power ESP8266 from same power supply.
+4. Use a saprate power source for relay or use 5volts power source and use 3.3 voltage regulator to power ESP8266 from same power supply.
 
 5. Make sure you enter the correct URL for webhook in API.ai
 
