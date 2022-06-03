@@ -41,28 +41,25 @@ class HttpWSSProtocol(websockets.WebSocketServerProtocol):
         response = ''
         try:
 
-            googleRequest = self.reader._buffer.decode('utf-8')
-            googleRequestJson = json.loads(googleRequest)
+            receivedRequest = self.reader._buffer.decode('utf-8')
+            receivedRequestJson = json.loads(receivedRequest)
 
             #{"location": "living", "state": "on", "device": "lights"}
-            if 'what' in googleRequestJson['result']['resolvedQuery']:
-                ESPparameters = googleRequestJson['result']['parameters']
-                ESPparameters['query'] = '?'
-            else:
-                ESPparameters = googleRequestJson['result']['parameters']
-                ESPparameters['query'] = 'cmd'
+            if 'code' in receivedRequestJson:
+                ESPparameters['code'] = receivedRequestJson['code']
+                ESPparameters['name'] = receivedRequestJson['name']
+
             # send command to ESP over websocket
             if self.rwebsocket== None:
                 print("Device is not connected!")
                 return
             await self.rwebsocket.send(json.dumps(ESPparameters))
 
-            #wait for response and send it back to API.ai as is
+            #wait for response and send it back to HTTP Client as is
             self.rddata = await self.rwebsocket.recv()
-            #{"speech": "It is working", "displayText": "It is working"}
+            #{"codeSent": "OK", "responseCode": "200"}
             print(self.rddata)
-            state = json.loads(self.rddata)['state']
-            self.rddata = '{"speech": "It is turned '+state+'", "displayText": "It is turned '+state+'"}'
+            self.rddata = '{"codeSent": "OK", "responseCode": "200"}'
 
             response = '\r\n'.join([
                 'HTTP/1.1 200 OK',
